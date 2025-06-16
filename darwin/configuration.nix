@@ -21,6 +21,17 @@ in
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = keys;
+    secrets = {
+      "auto_profile_tg/api_id" = { };
+      "auto_profile_tg/api_hash" = { };
+      "auto_profile_tg/phone_number" = { };
+      "auto_profile_tg/first_name" = { };
+      "auto_profile_tg/lat" = { };
+      "auto_profile_tg/lon" = { };
+      "auto_profile_tg/timezone" = { };
+      "auto_profile_tg/city" = { };
+      "auto_profile_tg/weather_api_key" = { };
+    };
   }; 
 
   nix = {
@@ -112,18 +123,18 @@ in
     localHostName = "air"; # Define your local host name.
   };
 
-  # services.auto_profile_tg = {
-  #   enable = true;
-  #   api_id = config.sops.secrets."auto_profile_tg/api_id".path;
-  #   api_hash = config.sops.secrets."auto_profile_tg/api_hash".path;
-  #   phone_number = config.sops.secrets."auto_profile_tg/phone_number".path;
-  #   first_name = config.sops.secrets."auto_profile_tg/first_name".path;
-  #   lat = config.sops.secrets."auto_profile_tg/lat".path;
-  #   lon = config.sops.secrets."auto_profile_tg/lon".path;
-  #   timezone = config.sops.secrets."auto_profile_tg/timezone".path;
-  #   city = config.sops.secrets."auto_profile_tg/city".path;
-  #   weather_api_key = config.sops.secrets."auto_profile_tg/weather_api_key".path;
-  # };
+  services.auto_profile_tg = {
+    enable = true;
+    api_id = config.sops.secrets."auto_profile_tg/api_id".path;
+    api_hash = config.sops.secrets."auto_profile_tg/api_hash".path;
+    phone_number = config.sops.secrets."auto_profile_tg/phone_number".path;
+    first_name = config.sops.secrets."auto_profile_tg/first_name".path;
+    lat = config.sops.secrets."auto_profile_tg/lat".path;
+    lon = config.sops.secrets."auto_profile_tg/lon".path;
+    timezone = config.sops.secrets."auto_profile_tg/timezone".path;
+    city = config.sops.secrets."auto_profile_tg/city".path;
+    weather_api_key = config.sops.secrets."auto_profile_tg/weather_api_key".path;
+  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
