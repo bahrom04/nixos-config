@@ -28,7 +28,7 @@ in
     # Path to key file for unlocking secrets
     age.keyFile = key;
     # Generate the damned key by yourself
-    age.generateKey = true;
+    age.generateKey = false;
     # Default file that contains list of secrets
     defaultSopsFile = ../secrets/secrets.yaml;
     # The format of the secret file
