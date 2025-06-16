@@ -1,6 +1,6 @@
 # .sops.yaml
 keys:
-  - &primary age1fusw3xw9qclvgm9atwm2sldcwh95mp0ltg3s38w24r2vwux90c8sxnlutk
+  - &primary age1r837tl8h5twmfcelj9a8yd30346d4q0qegw5xmsmuz8pn9qqf4yqw2ptag
   # - &secondary age17khgylv28qg5we66jxsju2ctqylzvuvvsvxxtgn4afdjz8lzy42slzeq08
 
 creation_rules:

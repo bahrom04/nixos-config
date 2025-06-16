@@ -58,14 +58,10 @@
       }
     )
     // {
-      darwinConfigurations.bahrom04 = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.air = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          home-manager.darwinModules.home-manager
-
           ./darwin/configuration.nix
-
-          inputs.auto_profile_tg.darwinModules.default
         ];
 
         specialArgs = {

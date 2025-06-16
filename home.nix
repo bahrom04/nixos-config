@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -8,6 +9,8 @@
 
 in {
   imports = [
+    inputs.sops-nix.homeManagerModules.sops
+
     modulesHome.fastfetch
     modulesHome.fish
     modulesHome.git
@@ -57,6 +60,27 @@ in {
     # nix-output-monitor
     espanso
   ];
+
+  nixpkgs = {
+      # Configure your nixpkgs instance
+      config = {
+        # Wallahi, forgive me RMS...
+        allowUnfree = true;
+        # Workaround for https://github.com/nix-community/home-manager/issues/2942
+        allowUnfreePredicate = _: true;
+        # Let the system use fucked up programs
+        allowBroken = true;
+      };
+    };
+
+  sops = {
+    # Path to key file for unlocking secrets
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    # Default file that contains list of secrets
+    defaultSopsFile = ./secrets/secrets.yaml;
+    # The format of the secret file
+    defaultSopsFormat = "yaml";
+  };
 
   home.stateVersion = "25.05";
 }
