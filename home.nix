@@ -5,6 +5,7 @@
 }: let
   modulesHome = import ./modules/home;
   modulesServices = import ./modules/services;
+
 in {
   imports = [
     modulesHome.fastfetch
@@ -31,8 +32,6 @@ in {
 
   # Foydalanuvchi profiliga oʻrnatilishi kerak boʻlgan paketlar
   home.packages = with pkgs; [
-    # ushbu keltirilganlar men kunlik davomida ishlatadiganlarim
-    # o'zingiznikini qo'shish yoki keltirilganlardan olib tashashdan tortinmang
     git
     gnupg # gpg key uchun
     neofetch
@@ -40,11 +39,8 @@ in {
     # arxivlar
     zip
     xz
-    unzip
-
-    # utilitalar
+    unzip  
     jq # json ustida ishlovchi yengil va qulay instrument
-    # tarmoq utilitalari
     mtr # tarmoq diagnostika utilitasi
     dnsutils # `dig` + `nslookup`
     ldns # `dig` o'rnini bosuvchi, `drill` buyrug'ini taqdim etadi
@@ -58,10 +54,6 @@ in {
     file
     which
     tree
-    # nix ga tegishli
-    #
-    # `nom` buyrug'ini beradi va `nix` day ishlaydi
-    # tafsilotli log chiqishini ta’minlaydi
     # nix-output-monitor
     espanso
   ];

@@ -27,7 +27,7 @@ in
     # Path to key file for unlocking secrets
     age.keyFile = "/Users/bahrom04/.config/sops/age/keys.txt";
     # Default file that contains list of secrets
-    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFile = ./secrets/secrets.yaml;
     # The format of the secret file
     defaultSopsFormat = "yaml";
   };
