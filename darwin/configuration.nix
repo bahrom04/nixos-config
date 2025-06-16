@@ -7,7 +7,7 @@
   ...
 }: 
 let
-  keys = "$HOME/Library/Application Support/sops/age/keys.txt";
+  keys = "/Users/bahrom04/.config/sops/age/keys.txt";
 in
 {
   imports = [
@@ -32,7 +32,7 @@ in
   environment = {
     variables = {
       EDITOR = "vim";
-      SOPS_AGE_KEY_FILE="~/.config/sops/age/keys.txt";
+      SOPS_AGE_KEY_FILE="${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
       };
     systemPackages = with pkgs; [
       nixfmt-rfc-style
