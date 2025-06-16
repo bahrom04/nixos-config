@@ -17,6 +17,12 @@ in
     inputs.auto_profile_tg.darwinModules.default
   ];
 
+  sops = {
+    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = keys;
+  }; 
+  
   nix = {
     enable = true;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
@@ -47,12 +53,6 @@ in
       allowBroken = true;
     };
   };
-
-  sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = keys;
-  }; 
 
   services.redis.enable = true;
 
