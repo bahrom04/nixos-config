@@ -8,8 +8,6 @@
   modulesServices = import ./modules/services;
 in {
   imports = [
-    # inputs.sops-nix.homeManagerModules.sops
-
     modulesHome.fastfetch
     modulesHome.fish
     modulesHome.git

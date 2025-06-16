@@ -7,10 +7,12 @@
   ...
 }: 
 let
-  keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
+  keys = "$HOME/Library/Application Support/sops/age/keys.txt";
 in
 {
   imports = [
+    inputs.sops-nix.darwinModules.sops
+
     inputs.home-manager.darwinModules.home-manager
     inputs.auto_profile_tg.darwinModules.default
   ];
@@ -28,6 +30,7 @@ in
       neovim
       fastfetch
       redis
+      age # very important
       sops
     ];
   };
