@@ -5,20 +5,18 @@
   outputs,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.home-manager.darwinModules.home-manager
     # inputs.auto_profile_tg.darwinModules.default
-    inputs.sops-nix.darwinModules.sops
   ];
 
   nix = {
-    enable = true;  
+    enable = true;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
     settings.experimental-features = "nix-command flakes";
   };
-  
+
   environment = {
     variables.EDITOR = "vim";
     systemPackages = with pkgs; [
@@ -29,27 +27,17 @@
     ];
   };
 
-nixpkgs = {
-        config = {
-        # Disable if you don't want unfree packages
-        allowUnfree = true;
-        # Disable if you don't want linux thingies on mac
-        allowUnsupportedSystem = true;
-        # Workaround for https://github.com/nix-community/home-manager/issues/2942
-        allowUnfreePredicate = _: true;
-        # Let the system use fucked up programs
-        allowBroken = true;
-      };
-};
-
-
-  sops = {
-    # Path to key file for unlocking secrets
-    age.keyFile = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
-    # Default file that contains list of secrets
-    defaultSopsFile = ../secrets/secrets.yaml;
-    # The format of the secret file
-    defaultSopsFormat = "yaml";
+  nixpkgs = {
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Disable if you don't want linux thingies on mac
+      allowUnsupportedSystem = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+      # Let the system use fucked up programs
+      allowBroken = true;
+    };
   };
 
   services.redis.enable = true;
@@ -71,9 +59,9 @@ nixpkgs = {
 
   users.users.bahrom04 = {
     name = "bahrom04";
-    home = "/Users/bahrom04"; 
+    home = "/Users/bahrom04";
   };
-  
+
   home-manager = {
     users.bahrom04 = import ../home.nix;
     extraSpecialArgs = {
@@ -101,8 +89,7 @@ nixpkgs = {
     enable = true;
   };
 
-
- # Networking DNS & Interfaces
+  # Networking DNS & Interfaces
   networking = {
     computerName = "air"; # Define your computer name.
     localHostName = "air"; # Define your local host name.

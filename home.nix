@@ -6,10 +6,9 @@
 }: let
   modulesHome = import ./modules/home;
   modulesServices = import ./modules/services;
-
 in {
   imports = [
-    inputs.sops-nix.homeManagerModules.sops
+    # inputs.sops-nix.homeManagerModules.sops
 
     modulesHome.fastfetch
     modulesHome.fish
@@ -42,7 +41,7 @@ in {
     # arxivlar
     zip
     xz
-    unzip  
+    unzip
     jq # json ustida ishlovchi yengil va qulay instrument
     mtr # tarmoq diagnostika utilitasi
     dnsutils # `dig` + `nslookup`
@@ -62,25 +61,25 @@ in {
   ];
 
   nixpkgs = {
-      # Configure your nixpkgs instance
-      config = {
-        # Wallahi, forgive me RMS...
-        allowUnfree = true;
-        # Workaround for https://github.com/nix-community/home-manager/issues/2942
-        allowUnfreePredicate = _: true;
-        # Let the system use fucked up programs
-        allowBroken = true;
-      };
+    # Configure your nixpkgs instance
+    config = {
+      # Wallahi, forgive me RMS...
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+      # Let the system use fucked up programs
+      allowBroken = true;
     };
-
-  sops = {
-    # Path to key file for unlocking secrets
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    # Default file that contains list of secrets
-    defaultSopsFile = ./secrets/secrets.yaml;
-    # The format of the secret file
-    defaultSopsFormat = "yaml";
   };
+
+  # sops = {
+  #   # Path to key file for unlocking secrets
+  #   age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  #   # Default file that contains list of secrets
+  #   defaultSopsFile = ./secrets/secrets.yaml;
+  #   # The format of the secret file
+  #   defaultSopsFormat = "yaml";
+  # };
 
   home.stateVersion = "25.05";
 }
