@@ -7,7 +7,8 @@
   ...
 }: 
 let
-  keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt"
+  keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
+in
 {
   imports = [
     inputs.home-manager.darwinModules.home-manager
@@ -27,6 +28,7 @@ let
       neovim
       fastfetch
       redis
+      sops
     ];
   };
 
