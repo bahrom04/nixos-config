@@ -5,10 +5,13 @@
   outputs,
   pkgs,
   ...
-}: {
+}: 
+let
+  keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt"
+{
   imports = [
     inputs.home-manager.darwinModules.home-manager
-    # inputs.auto_profile_tg.darwinModules.default
+    inputs.auto_profile_tg.darwinModules.default
   ];
 
   nix = {
@@ -39,6 +42,12 @@
       allowBroken = true;
     };
   };
+
+  sops = {
+    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = keys;
+  }; 
 
   services.redis.enable = true;
 
