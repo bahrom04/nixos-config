@@ -25,9 +25,11 @@ in
 
   sops = {
     # Path to key file for unlocking secrets
-    age.keyFile = "/Users/bahrom04/.config/sops/age/keys.txt";
+    age.keyFile = key;
+    # Generate the damned key by yourself
+    generateKey = true;
     # Default file that contains list of secrets
-    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFile = ../secrets/secrets.yaml;
     # The format of the secret file
     defaultSopsFormat = "yaml";
   };
