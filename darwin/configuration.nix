@@ -22,7 +22,7 @@ in
     defaultSopsFormat = "yaml";
     age.keyFile = keys;
   }; 
-  
+
   nix = {
     enable = true;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
@@ -30,7 +30,10 @@ in
   };
 
   environment = {
-    variables.EDITOR = "vim";
+    variables = {
+      EDITOR = "vim";
+      SOPS_AGE_KEY_FILE="~/.config/sops/age/keys.txt";
+      };
     systemPackages = with pkgs; [
       nixfmt-rfc-style
       neovim

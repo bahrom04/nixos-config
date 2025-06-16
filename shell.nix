@@ -7,6 +7,7 @@ pkgs.stdenv.mkDerivation {
     statix
     deadnix
     alejandra
+    age
     sops
   ];
 
