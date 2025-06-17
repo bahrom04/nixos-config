@@ -7,30 +7,31 @@
   ...
 }: 
 let
-  keys = "/Users/bahrom04/.config/sops/age/keys.txt";
+  age_keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
 in
 {
   imports = [
-    inputs.sops-nix.darwinModules.sops
-
     inputs.home-manager.darwinModules.home-manager
+    inputs.sops-nix.darwinModules.sops
+    
+    # Custom modules
     inputs.auto_profile_tg.darwinModules.default
   ];
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = keys;
+    age.keyFile = age_keys;
     secrets = {
-      "auto_profile_tg/api_id" = { };
-      "auto_profile_tg/api_hash" = { };
-      "auto_profile_tg/phone_number" = { };
-      "auto_profile_tg/first_name" = { };
-      "auto_profile_tg/lat" = { };
-      "auto_profile_tg/lon" = { };
-      "auto_profile_tg/timezone" = { };
-      "auto_profile_tg/city" = { };
-      "auto_profile_tg/weather_api_key" = { };
+      api_id = { owner = "bahrom04"; mode = "0440"; };
+      api_hash = { owner = "bahrom04"; mode = "0440"; };
+      phone_number = { owner = "bahrom04"; mode = "0440"; };
+      first_name = { owner = "bahrom04"; mode = "0440"; };
+      lat = { owner = "bahrom04"; mode = "0440"; };
+      lon = { owner = "bahrom04"; mode = "0440"; };
+      timezone = { owner = "bahrom04"; mode = "0440"; };
+      city = { owner = "bahrom04"; mode = "0440"; };
+      weather_api_key = { owner = "bahrom04"; mode = "0440"; };
     };
   }; 
 
@@ -43,14 +44,14 @@ in
   environment = {
     variables = {
       EDITOR = "vim";
-      SOPS_AGE_KEY_FILE="${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
+      SOPS_AGE_KEY_FILE=age_keys;
       };
     systemPackages = with pkgs; [
       nixfmt-rfc-style
       neovim
       fastfetch
       redis
-      age # very important
+      age
       sops
     ];
   };
@@ -97,12 +98,12 @@ in
     };
   };
 
-  # programs.zsh = {
-  #   enable = true;
-  #   enableCompletion = true;
-  #   enableBashCompletion = true;
-  #   enableSyntaxHighlighting = true;
-  # };
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableBashCompletion = true;
+    enableSyntaxHighlighting = true;
+  };
 
   # Automatic flake devShell loading
   programs.direnv = {
@@ -125,19 +126,16 @@ in
 
   services.auto_profile_tg = {
     enable = true;
-    api_id = config.sops.secrets."auto_profile_tg/api_id".path;
-    api_hash = config.sops.secrets."auto_profile_tg/api_hash".path;
-    phone_number = config.sops.secrets."auto_profile_tg/phone_number".path;
-    first_name = config.sops.secrets."auto_profile_tg/first_name".path;
-    lat = config.sops.secrets."auto_profile_tg/lat".path;
-    lon = config.sops.secrets."auto_profile_tg/lon".path;
-    timezone = config.sops.secrets."auto_profile_tg/timezone".path;
-    city = config.sops.secrets."auto_profile_tg/city".path;
-    weather_api_key = config.sops.secrets."auto_profile_tg/weather_api_key".path;
+    api_id = config.sops.secrets.api_id.path;
+    api_hash = config.sops.secrets.api_hash.path;
+    phone_number = config.sops.secrets.phone_number.path;
+    first_name = config.sops.secrets.first_name.path;
+    lat = config.sops.secrets.lat.path;
+    lon = config.sops.secrets.lon.path;
+    timezone = config.sops.secrets.timezone.path;
+    city = config.sops.secrets.city.path;
+    weather_api_key = config.sops.secrets.weather_api_key.path;
   };
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
 
   # Select host type for the system
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
