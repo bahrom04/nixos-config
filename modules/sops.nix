@@ -1,16 +1,15 @@
-{ 
+{
   config,
   lib,
   inputs,
   ...
-}: 
-
-{ 
+}: {
   imports = [
     inputs.sops-nix.darwinModules.sops
   ];
 
   sops = {
+    # gnupg.sshKeyPaths = [];
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = config.environment.variables.SOPS_AGE_KEY_FILE;

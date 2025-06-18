@@ -6,7 +6,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     initContent = ''
       eval "$(starship init zsh)"

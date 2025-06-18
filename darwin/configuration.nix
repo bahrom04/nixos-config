@@ -7,7 +7,7 @@
   ...
 }: let
   age_keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
-  
+
   modules = import ../modules;
 in {
   imports = [
