@@ -5,36 +5,19 @@
   outputs,
   pkgs,
   ...
-}: 
-let
+}: let
   age_keys = "${config.users.users.bahrom04.home}/.config/sops/age/keys.txt";
-in
-{
+  
+  modules = import ../modules;
+in {
   imports = [
-    inputs.home-manager.darwinModules.home-manager
-    inputs.sops-nix.darwinModules.sops
-    
     # Custom modules
     inputs.auto_profile_tg.darwinModules.default
+    # Home manager darwin modules
+    inputs.home-manager.darwinModules.home-manager
+    # Configuration modules
+    modules.sops
   ];
-
-  sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = age_keys;
-    secrets = {
-      api_id = { owner = "bahrom04"; mode = "0440"; };
-      api_hash = { owner = "bahrom04"; mode = "0440"; };
-      phone_number = { owner = "bahrom04"; mode = "0440"; };
-      first_name = { owner = "bahrom04"; mode = "0440"; };
-      lat = { owner = "bahrom04"; mode = "0440"; };
-      lon = { owner = "bahrom04"; mode = "0440"; };
-      timezone = { owner = "bahrom04"; mode = "0440"; };
-      city = { owner = "bahrom04"; mode = "0440"; };
-      weather_api_key = { owner = "bahrom04"; mode = "0440"; };
-    };
-  }; 
-
   nix = {
     enable = true;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
@@ -44,8 +27,8 @@ in
   environment = {
     variables = {
       EDITOR = "vim";
-      SOPS_AGE_KEY_FILE=age_keys;
-      };
+      SOPS_AGE_KEY_FILE = age_keys;
+    };
     systemPackages = with pkgs; [
       nixfmt-rfc-style
       neovim
@@ -96,13 +79,6 @@ in
     extraSpecialArgs = {
       inherit inputs outputs;
     };
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableBashCompletion = true;
-    enableSyntaxHighlighting = true;
   };
 
   # Automatic flake devShell loading

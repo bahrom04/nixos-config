@@ -4,10 +4,10 @@
 # Refer to the link below for more options:
 # https://nix-community.github.io/home-manager/options.xhtml
 {
-  git = import ./git;
-  fastfetch = import ./fastfetch;
-  zsh = import ./zsh;
-  fish = import ./fish;
-  starship = import ./starship;
-  vscode = import ./vscode;
+  git = import ./git.nix;
+  zsh = import ./zsh.nix;
+  fish = import ./fish.nix;
+  vscode = import ./vscode.nix;
+  starship = import ./starship.nix;
+  fastfetch = import ./fastfetch.nix;
 }

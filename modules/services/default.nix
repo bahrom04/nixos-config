@@ -1,3 +1,4 @@
 {
-  espanso = import ./espanso;
+  espanso = import ./espanso.nix;
+  tarjimonlar = import ./tarjimonlar;
 }
