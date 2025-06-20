@@ -101,7 +101,7 @@ in {
   };
 
   services.auto_profile_tg = {
-    enable = true;
+    enable = false;
     api_id = config.sops.secrets.api_id.path;
     api_hash = config.sops.secrets.api_hash.path;
     phone_number = config.sops.secrets.phone_number.path;
