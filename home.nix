@@ -56,6 +56,7 @@ in {
     tree
     # nix-output-monitor
     espanso
+    btop
   ];
 
   nixpkgs = {
