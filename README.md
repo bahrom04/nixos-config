@@ -1,3 +1,10 @@
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./.github/assets/nix-config-header.png">
+        <img alt="Welcome Image" src="./.github/assets/nix-config-header.png">
+    </picture>
+</p>
+
 ## NixOS
 sudo nixos-rebuild switch --flake .#nixos
 
@@ -20,3 +27,10 @@ nix flake check --all-systems --show-trace
 nix develop
 EDITOR=vim sops ./secrets/secrets.yaml
 ```
+
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./.github/assets/nix-config-footer.png">
+        <img alt="Welcome Image" src="./.github/assets/nix-config-footer.png">
+    </picture>
+</p>
